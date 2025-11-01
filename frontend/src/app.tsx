@@ -1,9 +1,18 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { Navbar } from './components'
 import { Navigate, Route, Routes } from 'react-router'
 import { CreateGame, Game } from './views'
+import { getSocket } from './utilities'
 
 export const App: FC = () => {
+	useEffect(() => {
+		const io = getSocket()
+		io.connect()
+		return () => {
+			io.disconnect()
+		}
+	}, [])
+
 	return (
 		<>
 			<Navbar />
