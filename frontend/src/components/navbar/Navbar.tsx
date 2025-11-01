@@ -11,7 +11,7 @@ export const Navbar: FC = () => {
 	const isCreateGame = pathname === `/${gameRoutes.createGame.path}`
 
 	return (
-		<nav className="w-full bg-sky-950">
+		<nav className="fixed top-0 right-0 left-0 z-100 w-full bg-sky-950">
 			<div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
 				<BackButton visible={!isCreateGame} />
 				<Typography variant="h4">

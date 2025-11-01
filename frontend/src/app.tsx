@@ -7,7 +7,7 @@ export const App: FC = () => {
 	return (
 		<>
 			<Navbar />
-			<main className="mx-auto h-screen max-w-7xl bg-amber-500">
+			<main className="z-1 mx-auto h-screen max-w-7xl pt-24">
 				<Routes>
 					<Route path="/" element={<Navigate to="/game" replace />} />
 					<Route path="/game" element={<CreateGame />} />
