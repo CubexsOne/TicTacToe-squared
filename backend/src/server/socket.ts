@@ -1,40 +1,29 @@
-import type { FastifyInstance } from 'fastify'
+import type { Server as HttpServer } from 'node:http'
 import { Server as SocketIOServer } from 'socket.io'
 
 import { isEnvLocal } from '../utilities/is-environment'
-import { getFastifyInstance } from './fastify'
 
 let socketServer: SocketIOServer | undefined
-let hooksRegistered = false
 
-export const createSocketServer = (fastify?: FastifyInstance): SocketIOServer => {
-	const fastifyInstance = fastify ?? getFastifyInstance()
-
+export const createSocketServer = (httpServer: HttpServer): SocketIOServer => {
 	if (socketServer) {
 		return socketServer
 	}
 
-	socketServer = new SocketIOServer(
-		fastifyInstance.server,
-		isEnvLocal
+	socketServer = new SocketIOServer(httpServer, {
+		path: '/socket.io/',
+		cors: isEnvLocal
 			? {
-					cors: {
-						origin: '*'
-					}
+					origin: 'http://localhost:8080',
+					credentials: true
 				}
 			: undefined
-	)
+	})
 
-	if (!hooksRegistered) {
-		fastifyInstance.addHook('onClose', (_, done) => {
-			socketServer?.close()
-			socketServer = undefined
-			hooksRegistered = false
-			done()
-		})
-
-		hooksRegistered = true
-	}
+	httpServer.on('close', () => {
+		socketServer?.close()
+		socketServer = undefined
+	})
 
 	return socketServer
 }

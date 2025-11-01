@@ -1,3 +1,5 @@
+import pino from 'pino'
+
 import { isEnvLocal } from './is-environment'
 
 export const pinoLoggerConfig = {
@@ -9,3 +11,5 @@ export const pinoLoggerConfig = {
 			}
 		: undefined
 }
+
+export const logger = pino(pinoLoggerConfig)

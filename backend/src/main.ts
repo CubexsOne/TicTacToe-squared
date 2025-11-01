@@ -1,32 +1,27 @@
 import 'dotenv/config'
 
-import type { Server as SocketIOServer } from 'socket.io'
+import { createServer } from 'node:http'
 
-import { createFastifyInstance, createSocketServer } from './server'
-import { environments } from './utilities'
+import { createExpressApp, createSocketServer } from './server'
+import { environments, logger } from './utilities'
 
-declare module 'fastify' {
-	interface FastifyInstance {
-		io: SocketIOServer
-	}
-}
+const app = createExpressApp()
 
-const fastify = createFastifyInstance()
-const io = createSocketServer(fastify)
+const httpServer = createServer(app)
+const io = createSocketServer(httpServer)
 
-fastify.decorate('io', io)
-
-fastify.addHook('onReady', async () => {
-	fastify.log.info('Socket.io is ready!')
+io.on('connection', (socket) => {
+	logger.info({ socketId: socket.id }, 'New connection established')
 })
 
-fastify.get('/', function (_, reply) {
-	reply.send({ hello: 'world' })
+httpServer.on('error', (error) => {
+	logger.error({ err: error }, 'HTTP server error')
+	process.exit(1)
 })
 
-fastify.listen({ port: environments.NODE_PORT }, function (err) {
-	if (err) {
-		fastify.log.error(err)
-		process.exit(1)
-	}
+const port = environments.NODE_PORT
+
+httpServer.listen(port, () => {
+	logger.info(`Server listening at http://localhost:${port}`)
+	logger.info('Socket.io is ready!')
 })
