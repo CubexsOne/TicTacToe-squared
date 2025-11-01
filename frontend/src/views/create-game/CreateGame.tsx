@@ -9,9 +9,14 @@ const TABS = {
 }
 
 export const CreateGame: FC = () => {
+	// Hooks
 	const navigate = useNavigate()
 	const { t } = useTranslation()
+
+	// Navigation
 	const [tab, setTab] = useState(0)
+
+	// Settings
 	const [playername, setPlayername] = useState<string>('')
 	const [gameId, setGameId] = useState<string>('')
 
@@ -29,11 +34,6 @@ export const CreateGame: FC = () => {
 		setGameId(event.currentTarget.value.trim())
 	}
 	const handleJoinExistingGame = () => {
-		if (gameId === '') {
-			// TODO: Replace alert with a error notification
-			alert('Game id is empty!')
-			return
-		}
 		navigate(`/game/${gameId}`)
 	}
 
@@ -82,6 +82,7 @@ export const CreateGame: FC = () => {
 							<Button
 								aria-label={t('view_create_game_game_join_button')}
 								children={t('view_create_game_game_join_button')}
+								disabled={gameId.length === 0}
 								onClick={handleJoinExistingGame}
 								variant="contained"
 							/>
