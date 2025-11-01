@@ -9,7 +9,7 @@ import {
 	playerSymbols
 } from '../../components'
 
-export const Lobby: FC = () => {
+export const Game: FC = () => {
 	const [currentRound, setCurrentRound] = useState<number>(0)
 	const [gameMap, setGameMap] = useState<GameMap[][]>(createNewGameMap())
 	const [hasWon, setHasWon] = useState<boolean>(false)
