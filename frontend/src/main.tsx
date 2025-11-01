@@ -7,7 +7,7 @@ import './index.css'
 
 import './i18n/i18n'
 import { theme } from './theme'
-import { App } from './views/app'
+import { App } from './App'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
