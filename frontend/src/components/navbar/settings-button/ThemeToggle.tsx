@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { ToggleButton, ToggleButtonGroup, useColorScheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
@@ -11,13 +11,26 @@ interface Props {
 
 type ColorSchemes = 'light' | 'dark' | 'system' | undefined
 export const ThemeToggle: FC<Props> = ({ handleClose }) => {
-	const { mode, setMode } = useColorScheme()
+	const { mode, setMode, systemMode } = useColorScheme()
 	const { t } = useTranslation()
 	const [theme, setTheme] = useState<ColorSchemes>(mode)
 
+	useEffect(() => {
+		if (mode && mode === 'system') {
+			if (systemMode) {
+				setMode(systemMode)
+				setTheme(systemMode)
+				return
+			}
+			return
+		}
+
+		setMode('dark')
+		setTheme('dark')
+	}, [mode, setMode, systemMode])
+
 	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: 'dark' | 'light') => {
 		handleClose()
-		// TODO: Implement theme-change (tailwind & MUI)
 		setMode(newValue)
 		setTheme(newValue)
 	}
