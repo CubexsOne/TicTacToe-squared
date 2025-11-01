@@ -21,6 +21,7 @@ export const LanguageToggle: FC<Props> = ({ handleClose }) => {
 			exclusive
 			onChange={handleChange}
 			aria-label={t('navigation_settings_menu_toggle_group_language')}
+			fullWidth
 		>
 			<ToggleButton
 				value="en"

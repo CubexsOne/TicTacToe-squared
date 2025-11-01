@@ -40,6 +40,7 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 			exclusive
 			onChange={handleChange}
 			aria-label={t('navigation_settings_menu_toggle_group_theme')}
+			fullWidth
 		>
 			<ToggleButton
 				value="dark"
