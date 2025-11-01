@@ -48,18 +48,19 @@ export const CreateGame: FC = () => {
 					<>
 						<CardContent>
 							<TextField
+								className="w-full"
 								id="playername-input"
 								label={t('view_create_game_playername_input_label')}
-								variant="outlined"
-								value={playername}
 								onChange={handlePlayernameInput}
-								className="w-full"
+								value={playername}
+								variant="outlined"
 							/>
 						</CardContent>
 						<CardActions className="justify-center">
 							<Button
 								aria-label={t('view_create_game_game_create_button')}
 								children={t('view_create_game_game_create_button')}
+								disabled={playername.length === 0}
 								onClick={handleGameCreation}
 								variant="contained"
 							/>
@@ -70,12 +71,12 @@ export const CreateGame: FC = () => {
 					<>
 						<CardContent className="flex items-center justify-between gap-2">
 							<TextField
+								className="w-full"
 								id="game-id-input"
 								label={t('view_create_game_game_id_input_label')}
-								variant="outlined"
-								value={gameId}
 								onChange={handleGameIdInput}
-								className="w-full"
+								value={gameId}
+								variant="outlined"
 							/>
 						</CardContent>
 						<CardActions className="justify-center">
