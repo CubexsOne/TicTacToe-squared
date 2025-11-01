@@ -1,3 +1,5 @@
+@config '../tailwind.config.ts';
+
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
