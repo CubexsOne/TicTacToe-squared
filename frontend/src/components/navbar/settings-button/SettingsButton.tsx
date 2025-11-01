@@ -26,6 +26,7 @@ export const SettingsButton: FC = () => {
 				aria-haspopup="true"
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
+				color="inherit"
 			>
 				<SettingsIcon fontSize="inherit" />
 			</IconButton>
