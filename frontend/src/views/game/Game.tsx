@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react'
-import { Button, Stack, Typography } from '@mui/material'
+import { Stack } from '@mui/material'
 import {
 	Board,
 	checkForWin,
@@ -12,7 +12,6 @@ import {
 export const Game: FC = () => {
 	const [currentRound, setCurrentRound] = useState<number>(0)
 	const [gameMap, setGameMap] = useState<GameMap[][]>(createNewGameMap())
-	const [hasWon, setHasWon] = useState<boolean>(false)
 
 	const handleClick = (gameRow: number, gameCol: number) => {
 		return (fieldRow: number, fieldCol: number) => {
@@ -28,7 +27,6 @@ export const Game: FC = () => {
 			console.log({ gameRow, gameCol, fieldRow, fieldCol, currentField })
 			if (checkForWin(currentField.board, fieldRow, fieldCol, currentRound)) {
 				setGameMap(nextGameMap)
-				setHasWon(true)
 				return
 			}
 
@@ -38,19 +36,8 @@ export const Game: FC = () => {
 		}
 	}
 
-	const handleGameReset = () => {
-		setCurrentRound(0)
-		setGameMap(createNewGameMap())
-		setHasWon(false)
-	}
-
 	return (
-		<Stack alignItems="center" justifyContent="center" spacing={8} height="100vh">
-			<Stack>
-				<Typography variant="h3" textAlign="center" height={64}>
-					{!hasWon ? '' : `${playerSymbols[currentRound % 2]} has won the Game!`}
-				</Typography>
-			</Stack>
+		<Stack alignItems="center" justifyContent="center" spacing={8} className="h-full">
 			{gameMap.map((row, rowIndex) => (
 				<Stack direction="row" spacing={8} key={rowIndex}>
 					{row.map((col, colIndex) => (
@@ -63,9 +50,6 @@ export const Game: FC = () => {
 					))}
 				</Stack>
 			))}
-			<Button variant="outlined" onClick={handleGameReset}>
-				Reset Game
-			</Button>
 		</Stack>
 	)
 }
