@@ -47,9 +47,6 @@ export const Game: FC = () => {
 	return (
 		<Stack alignItems="center" justifyContent="center" spacing={8} height="100vh">
 			<Stack>
-				<Typography variant="h1">
-					Tic Tac Toe<sup>2</sup>
-				</Typography>
 				<Typography variant="h3" textAlign="center" height={64}>
 					{!hasWon ? '' : `${playerSymbols[currentRound % 2]} has won the Game!`}
 				</Typography>
