@@ -20,12 +20,18 @@ export const LanguageToggle: FC<Props> = ({ handleClose }) => {
 			value={language}
 			exclusive
 			onChange={handleChange}
-			aria-label={t('settings_toggle_group_language')}
+			aria-label={t('navigation_settings_menu_toggle_group_language')}
 		>
-			<ToggleButton value="en" aria-label={t('settings_toggle_group_option_english_language')}>
+			<ToggleButton
+				value="en"
+				aria-label={t('navigation_settings_menu_toggle_group_option_english_language')}
+			>
 				🇺🇸
 			</ToggleButton>
-			<ToggleButton value="de" aria-label={t('settings_toggle_group_option_german_language')}>
+			<ToggleButton
+				value="de"
+				aria-label={t('navigation_settings_menu_toggle_group_option_german_language')}
+			>
 				🇩🇪
 			</ToggleButton>
 		</ToggleButtonGroup>
