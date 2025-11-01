@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 export const LanguageToggle: FC = () => {
 	const { t, i18n } = useTranslation()
-	const [language, setLanguage] = useState<string>(i18n.language)
+	const [language, setLanguage] = useState<string>(i18n.language.split('-')[0])
 
 	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: string) => {
 		setLanguage(newValue)
