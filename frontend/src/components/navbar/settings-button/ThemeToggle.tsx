@@ -5,12 +5,8 @@ import { useTranslation } from 'react-i18next'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 
-interface Props {
-	handleClose: () => void
-}
-
 type ColorSchemes = 'light' | 'dark' | 'system' | undefined
-export const ThemeToggle: FC<Props> = ({ handleClose }) => {
+export const ThemeToggle: FC = () => {
 	const { mode, setMode, systemMode } = useColorScheme()
 	const { t } = useTranslation()
 	const [theme, setTheme] = useState<ColorSchemes>(mode)
@@ -33,7 +29,6 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 	}, [mode, setMode, systemMode])
 
 	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: 'dark' | 'light') => {
-		handleClose()
 		setMode(newValue)
 		setTheme(newValue)
 	}

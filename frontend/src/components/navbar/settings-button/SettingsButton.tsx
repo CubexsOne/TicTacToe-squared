@@ -14,9 +14,7 @@ export const SettingsButton: FC = () => {
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
-	const handleClose = () => {
-		setAnchorEl(null)
-	}
+
 	return (
 		<>
 			<IconButton
@@ -34,7 +32,7 @@ export const SettingsButton: FC = () => {
 				id={SETTINGS_MENU}
 				anchorEl={anchorEl}
 				open={open}
-				onClose={handleClose}
+				onClose={() => setAnchorEl(null)}
 				slotProps={{
 					list: {
 						'aria-labelledby': SETTINGS_BUTTON
@@ -42,11 +40,11 @@ export const SettingsButton: FC = () => {
 				}}
 			>
 				<MenuItem>
-					<ThemeToggle handleClose={handleClose} />
+					<ThemeToggle />
 				</MenuItem>
 				<Divider />
 				<MenuItem>
-					<LanguageToggle handleClose={handleClose} />
+					<LanguageToggle />
 				</MenuItem>
 			</Menu>
 		</>
