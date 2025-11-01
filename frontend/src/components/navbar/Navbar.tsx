@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { useLocation } from 'react-router'
-import { Typography } from '@mui/material'
+import { AppBar, Toolbar, Typography } from '@mui/material'
 
 import { gameRoutes } from '../../routes'
 import { BackButton } from './BackButton'
@@ -11,14 +11,16 @@ export const Navbar: FC = () => {
 	const isCreateGame = pathname === `/${gameRoutes.createGame.path}`
 
 	return (
-		<nav className="fixed top-0 right-0 left-0 z-100 w-full bg-sky-950">
-			<div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
-				<BackButton visible={!isCreateGame} />
-				<Typography variant="h4">
-					Tic Tac Toe<sup>2</sup>
-				</Typography>
-				<SettingsButton />
-			</div>
-		</nav>
+		<AppBar position="fixed" sx={{ alignItems: 'stretch' }}>
+			<Toolbar disableGutters sx={{ justifyContent: 'center' }}>
+				<div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2">
+					<BackButton visible={!isCreateGame} />
+					<Typography variant="h4">
+						Tic Tac Toe<sup>2</sup>
+					</Typography>
+					<SettingsButton />
+				</div>
+			</Toolbar>
+		</AppBar>
 	)
 }
