@@ -18,6 +18,10 @@ export const Lobby: FC = () => {
 		return (fieldRow: number, fieldCol: number) => {
 			const nextGameMap = cloneGameMap(gameMap)
 			const currentField = nextGameMap[gameRow][gameCol]
+			if (currentField.board[fieldRow][fieldCol] !== '') {
+				return
+			}
+
 			currentField.board[fieldRow][fieldCol] = playerSymbols[currentRound % 2]
 			currentField.active = false
 
