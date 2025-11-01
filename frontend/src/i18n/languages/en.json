@@ -1,6 +1,12 @@
 {
 	"translation": {
 		"navigation_create_game": "Back to game creation",
-		"navigation_tooltip_create_game": "Back to game creation"
+		"navigation_tooltip_create_game": "Back to game creation",
+		"settings_toggle_group_theme": "Select color theme",
+		"settings_toggle_group_option_dark_theme": "Dark",
+		"settings_toggle_group_option_light_theme": "Light",
+		"settings_toggle_group_language": "Select language",
+		"settings_toggle_group_option_english_language": "English",
+		"settings_toggle_group_option_german_language": "German"
 	}
 }

@@ -9,7 +9,7 @@ export const LanguageToggle: FC<Props> = ({ handleClose }) => {
 	const { t, i18n } = useTranslation()
 	const [language, setLanguage] = useState<string>(i18n.language)
 
-	const handleChange = (event: React.MouseEvent<HTMLElement>, newValue: string) => {
+	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: string) => {
 		handleClose()
 		// TODO: Implement language change (save settings in browser)
 		setLanguage(newValue)
@@ -20,13 +20,13 @@ export const LanguageToggle: FC<Props> = ({ handleClose }) => {
 			value={language}
 			exclusive
 			onChange={handleChange}
-			aria-label={t('select language')}
+			aria-label={t('settings_toggle_group_language')}
 		>
-			<ToggleButton value="de" aria-label={t('german')}>
-				{t('german')}
+			<ToggleButton value="en" aria-label={t('settings_toggle_group_option_english_language')}>
+				🇺🇸
 			</ToggleButton>
-			<ToggleButton value="en" aria-label={t('english')}>
-				{t('english')}
+			<ToggleButton value="de" aria-label={t('settings_toggle_group_option_german_language')}>
+				🇩🇪
 			</ToggleButton>
 		</ToggleButtonGroup>
 	)

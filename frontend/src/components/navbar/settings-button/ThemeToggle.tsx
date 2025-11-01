@@ -2,6 +2,9 @@ import { useState, type FC } from 'react'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
+
 interface Props {
 	handleClose: () => void
 }
@@ -9,7 +12,7 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 	const { t } = useTranslation()
 	const [theme, setTheme] = useState<string>('dark')
 
-	const handleChange = (event: React.MouseEvent<HTMLElement>, newValue: string) => {
+	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: string) => {
 		handleClose()
 		// TODO: Implement theme-change (tailwind & MUI)
 		setTheme(newValue)
@@ -19,13 +22,13 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 			value={theme}
 			exclusive
 			onChange={handleChange}
-			aria-label={t('select theme')}
+			aria-label={t('settings_toggle_group_theme')}
 		>
-			<ToggleButton value="light" aria-label={t('light theme')}>
-				{t('Light')}
+			<ToggleButton value="dark" aria-label={t('settings_toggle_group_option_dark_theme')}>
+				<DarkModeIcon />
 			</ToggleButton>
-			<ToggleButton value="dark" aria-label={t('dark theme')}>
-				{t('Dark')}
+			<ToggleButton value="light" aria-label={t('settings_toggle_group_option_light_theme')}>
+				<LightModeIcon />
 			</ToggleButton>
 		</ToggleButtonGroup>
 	)

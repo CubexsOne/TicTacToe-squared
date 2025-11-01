@@ -1,6 +1,12 @@
 {
 	"translation": {
 		"navigation_create_game": "Zurück zur Spielerstellung",
-		"navigation_tooltip_create_game": "Zurück zur Spielerstellung"
+		"navigation_tooltip_create_game": "Zurück zur Spielerstellung",
+		"settings_toggle_group_theme": "Farbschema auswählen",
+		"settings_toggle_group_option_dark_theme": "Dunkel",
+		"settings_toggle_group_option_light_theme": "Hell",
+		"settings_toggle_group_language": "Sprache auswählen",
+		"settings_toggle_group_option_english_language": "Englisch",
+		"settings_toggle_group_option_german_language": "Deutsch"
 	}
 }
