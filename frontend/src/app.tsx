@@ -1,12 +1,12 @@
 import { useState, type FC } from 'react'
 import { Button, Stack, Typography } from '@mui/material'
-import { Board } from './board'
-import { createNewGameMap, cloneGameMap } from './gameMap/map-utilities'
-import type { GameMap } from './gameMap/model'
-import { playerSymbols } from './gameMap/player-symbols'
-import { checkForWin } from './gameMap/check-for-win'
+import { Board } from './components/board'
+import { createNewGameMap, cloneGameMap } from './components/game-map/map-utilities'
+import type { GameMap } from './components/game-map/model'
+import { playerSymbols } from './components/game-map/player-symbols'
+import { checkForWin } from './components/game-map/check-for-win'
 
-const App: FC = () => {
+export const App: FC = () => {
 	const [currentRound, setCurrentRound] = useState<number>(0)
 	const [gameMap, setGameMap] = useState<GameMap[][]>(createNewGameMap())
 	const [hasWon, setHasWon] = useState<boolean>(false)
@@ -65,5 +65,3 @@ const App: FC = () => {
 		</Stack>
 	)
 }
-
-export default App
