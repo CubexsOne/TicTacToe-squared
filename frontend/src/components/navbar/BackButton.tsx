@@ -24,6 +24,7 @@ export const BackButton: FC<Props> = ({ visible }) => {
 				onClick={() => navigate(gameRoutes.createGame.path)}
 				size="large"
 				aria-label={t(gameRoutes.createGame.tooltip)}
+				color="inherit"
 			>
 				<ArrowBackIcon fontSize="inherit" />
 			</IconButton>
