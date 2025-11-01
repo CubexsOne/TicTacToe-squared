@@ -25,8 +25,11 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 			return
 		}
 
-		setMode('dark')
-		setTheme('dark')
+		if (!mode) {
+			setMode('dark')
+			setTheme('dark')
+			return
+		}
 	}, [mode, setMode, systemMode])
 
 	const handleChange = (_event: React.MouseEvent<HTMLElement>, newValue: 'dark' | 'light') => {
