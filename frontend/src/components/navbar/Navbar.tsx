@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 
 import { gameRoutes } from '../../routes'
 import { BackButton } from './BackButton'
-import { SettingsButton } from './SettingsButton'
+import { SettingsButton } from './settings-button/SettingsButton'
 
 export const Navbar: FC = () => {
 	const { pathname } = useLocation()
