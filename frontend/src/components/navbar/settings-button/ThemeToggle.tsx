@@ -22,12 +22,18 @@ export const ThemeToggle: FC<Props> = ({ handleClose }) => {
 			value={theme}
 			exclusive
 			onChange={handleChange}
-			aria-label={t('settings_toggle_group_theme')}
+			aria-label={t('navigation_settings_menu_toggle_group_theme')}
 		>
-			<ToggleButton value="dark" aria-label={t('settings_toggle_group_option_dark_theme')}>
+			<ToggleButton
+				value="dark"
+				aria-label={t('navigation_settings_menu_toggle_group_option_dark_theme')}
+			>
 				<DarkModeIcon />
 			</ToggleButton>
-			<ToggleButton value="light" aria-label={t('settings_toggle_group_option_light_theme')}>
+			<ToggleButton
+				value="light"
+				aria-label={t('navigation_settings_menu_toggle_group_option_light_theme')}
+			>
 				<LightModeIcon />
 			</ToggleButton>
 		</ToggleButtonGroup>

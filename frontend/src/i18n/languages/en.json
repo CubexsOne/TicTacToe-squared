@@ -2,11 +2,17 @@
 	"translation": {
 		"navigation_create_game": "Back to game creation",
 		"navigation_tooltip_create_game": "Back to game creation",
-		"settings_toggle_group_theme": "Select color theme",
-		"settings_toggle_group_option_dark_theme": "Dark",
-		"settings_toggle_group_option_light_theme": "Light",
-		"settings_toggle_group_language": "Select language",
-		"settings_toggle_group_option_english_language": "English",
-		"settings_toggle_group_option_german_language": "German"
+		"navigation_settings_menu_toggle_group_theme": "Select color theme",
+		"navigation_settings_menu_toggle_group_option_dark_theme": "Dark",
+		"navigation_settings_menu_toggle_group_option_light_theme": "Light",
+		"navigation_settings_menu_toggle_group_language": "Select language",
+		"navigation_settings_menu_toggle_group_option_english_language": "English",
+		"navigation_settings_menu_toggle_group_option_german_language": "German",
+		"view_create_game_game_create_button": "Create game",
+		"view_create_game_game_create_title": "New game",
+		"view_create_game_game_id_input_label": "Game-ID",
+		"view_create_game_game_join_button": "Join game",
+		"view_create_game_game_join_title": "Join game",
+		"view_create_game_playername_input_label": "Playername"
 	}
 }
