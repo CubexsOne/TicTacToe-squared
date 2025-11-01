@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 import { useLocation } from 'react-router'
-import { IconButton, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 
-import SettingsIcon from '@mui/icons-material/Settings'
 import { gameRoutes } from '../../routes'
 import { BackButton } from './BackButton'
+import { SettingsButton } from './SettingsButton'
 
 export const Navbar: FC = () => {
 	const { pathname } = useLocation()
@@ -17,9 +17,7 @@ export const Navbar: FC = () => {
 				<Typography variant="h4">
 					Tic Tac Toe<sup>2</sup>
 				</Typography>
-				<IconButton onClick={() => alert('Settings!')} size="large">
-					<SettingsIcon fontSize="inherit" />
-				</IconButton>
+				<SettingsButton />
 			</div>
 		</nav>
 	)
