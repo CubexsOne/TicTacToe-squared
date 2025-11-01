@@ -1,5 +1,6 @@
 {
 	"translation": {
-		"Welcome to React": "Welcome to React and react-i18next"
+		"navigation_create_game": "Back to game creation",
+		"navigation_tooltip_create_game": "Back to game creation"
 	}
 }
