@@ -7,7 +7,7 @@ export const GAME_CREATED = 'game_created'
 
 export const handleCreateGame = (socket: Socket, playername: string) => {
 	logger.info(`Event received: ${CREATE_GAME}`)
-	const newGame = GameManager.Instance.create(socket.id, playername)
-	socket.emit(GAME_CREATED, newGame)
-	logger.info({ game: newGame }, `Event emitted: ${GAME_CREATED}`)
+	const gameId = GameManager.Instance.create(socket.id, playername)
+	socket.emit(GAME_CREATED, gameId)
+	logger.info({ gameId }, `Event emitted: ${GAME_CREATED}`)
 }

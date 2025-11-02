@@ -1,4 +1,4 @@
-import { randomUUID, UUID } from 'crypto'
+import { randomUUID, UUID } from 'node:crypto'
 
 type Player = {
 	socketId: string
@@ -33,7 +33,7 @@ export class GameManager {
 
 	private constructor() {}
 
-	public create(socketId: string, playername: string): Game {
+	public create(socketId: string, playername: string): Game['id'] {
 		const firstPlayer: Player = {
 			socketId,
 			playername,
@@ -47,6 +47,6 @@ export class GameManager {
 		}
 
 		this.games.push(game)
-		return game
+		return game.id
 	}
 }
