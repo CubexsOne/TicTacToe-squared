@@ -2,6 +2,9 @@ import { useState, type ChangeEvent, type FC } from 'react'
 import { useNavigate } from 'react-router'
 import { Box, Button, Card, CardActions, CardContent, Tab, Tabs, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { getSocket } from '../../utilities'
+import { incomingEvents, outgoingEvents } from '../../utilities/socket-events'
+import type { Game } from '../game/model'
 
 const TABS = {
 	CREATE_GAME: 0,
@@ -20,6 +23,11 @@ export const CreateGame: FC = () => {
 	const [playername, setPlayername] = useState<string>('')
 	const [gameId, setGameId] = useState<string>('')
 
+	const io = getSocket()
+	io.on(incomingEvents.GAME_CREATED, (gameId: Game['id']) => {
+		navigate(`/game/${gameId}`)
+	})
+
 	const handleChange = (_event: React.SyntheticEvent, newTab: number) => {
 		setTab(newTab)
 	}
@@ -28,7 +36,9 @@ export const CreateGame: FC = () => {
 		setPlayername(event.currentTarget.value.trim())
 	}
 
-	const handleGameCreation = () => {}
+	const handleGameCreation = () => {
+		io.emit(outgoingEvents.CREATE_GAME, playername)
+	}
 
 	const handleGameIdInput = (event: ChangeEvent<HTMLInputElement>) => {
 		setGameId(event.currentTarget.value.trim())
