@@ -11,7 +11,7 @@ const TABS = {
 	JOIN_GAME: 1
 }
 
-export const CreateGame: FC = () => {
+export const CreateGameView: FC = () => {
 	// Hooks
 	const navigate = useNavigate()
 	const { t } = useTranslation()

@@ -1,2 +1,2 @@
-export * from './create-game/CreateGame'
-export * from './game/Game'
+export * from './create-game/CreateGameView'
+export * from './game/GameView'
