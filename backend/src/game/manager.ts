@@ -1,18 +1,20 @@
 import { randomUUID, UUID } from 'node:crypto'
+import { createNewGameMap, GameMap } from './map'
 
-type Player = {
+export type Player = {
 	socketId: string
 	playername: string
 	symbol: string
 }
 
-type Game = {
+export type Game = {
 	id: UUID
+	currentRound: number
 	player: Player[]
-	board: object
+	board: GameMap[][]
 }
 
-type Games = Game[]
+export type Games = Game[]
 
 export class GameManager {
 	private static instance: GameManager | null = null
@@ -42,11 +44,17 @@ export class GameManager {
 
 		const game: Game = {
 			id: randomUUID(),
+			currentRound: 0,
 			player: [firstPlayer],
-			board: {}
+			board: createNewGameMap()
 		}
 
 		this.games.push(game)
 		return game.id
+	}
+
+	public getGameById(id: Game['id']): Game | null {
+		const game = this.games.find((item) => item.id === id)
+		return game ?? null
 	}
 }
