@@ -12,7 +12,6 @@ import { useNavigate, useParams } from 'react-router'
 import { getSocket, incomingEvents, outgoingEvents } from '../../utilities'
 import type { Game } from './model'
 import { Board, GameIdCopyField } from '../../components'
-import { playerSymbols } from '../../utilities/game'
 import { useTranslation } from 'react-i18next'
 
 export const GameView: FC = () => {
@@ -23,10 +22,7 @@ export const GameView: FC = () => {
 	const [showWinModal, setShowWinModal] = useState<boolean>(false)
 	const io = getSocket()
 
-	console.log('win', { 'win?': game?.win !== undefined, showWinModal })
-
 	useEffect(() => {
-		console.log({ game })
 		if (game === undefined) {
 			io.emit(outgoingEvents.REQUEST_GAME, id)
 			io.once(incomingEvents.RECEIVE_GAME, (game: Game) => setGame(game))
@@ -71,12 +67,6 @@ export const GameView: FC = () => {
 		return true
 	}
 
-	console.log({
-		playerId: io.id,
-		currentRound: game?.currentRound,
-		activePlayer: playerSymbols[game?.currentRound || 0 % 2]
-	})
-
 	return (
 		<>
 			<Grid className="h-1/10 px-8 py-4" container spacing={2}>
@@ -103,12 +93,16 @@ export const GameView: FC = () => {
 				aria-labelledby="customized-dialog-title"
 				open={showWinModal}
 			>
-				<DialogTitle sx={{ m: 0, p: 2 }}>{t('view_game_win_modal_title')}</DialogTitle>
+				<DialogTitle className="text-center">
+					{'🎉 ' + t('view_game_win_modal_title') + ' 🎉'}
+				</DialogTitle>
 				<DialogContent
 					dividers
 				>{`${game?.win?.player.playername} ${t('view_game_win_modal_content')}`}</DialogContent>
-				<DialogActions>
-					<Button autoFocus onClick={handleCloseModal}>
+				<DialogActions
+					sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2 }}
+				>
+					<Button autoFocus onClick={handleCloseModal} variant="contained">
 						{t('view_game_win_modal_action')}
 					</Button>
 				</DialogActions>
