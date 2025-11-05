@@ -1,12 +1,10 @@
 import { Socket } from 'socket.io'
 import { logger } from '../utilities'
 import { Game, GameManager, Player } from '../game/manager'
+import { UPDATE_GAME_STATE } from './interact-with-game'
 
 export const JOINING_GAME = 'joining_game'
 export const JOIN_GAME = 'join_game'
-
-// TODO: Move to better location
-export const UPDATE_GAME_STATE = 'update_game_state'
 
 type JoinGame = { playername: Player['playername']; requestedGameId: Game['id'] }
 
