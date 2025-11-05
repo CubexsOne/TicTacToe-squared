@@ -20,6 +20,9 @@
 		"view_game_player_view_player_label": "Spieler",
 		"view_game_player_view_your_turn_label": "Du bist dran",
 		"view_game_waiting_player_typography": "Warte auf Spieler 2...",
+		"view_game_lose_modal_action": "Zurück zur Lobby!",
+		"view_game_lose_modal_content": "Kein Spieler hat das spiel gewonnen",
+		"view_game_lose_modal_title": "Spiel verloren",
 		"view_game_win_modal_action": "Zurück zur Lobby!",
 		"view_game_win_modal_content": "hat das Spiel gewonnen!",
 		"view_game_win_modal_title": "Spiel gewonnen"

@@ -35,6 +35,7 @@ export type GameResponseMeta = {
 	game: Game | null
 	win: boolean
 	error: string | null // TODO: Maybe enum?
+	lose: boolean
 }
 
 export class GameManager {
@@ -104,20 +105,21 @@ export class GameManager {
 
 		if (playerIndex === -1) {
 			// TODO: Checkout what to do if invalid player is interacting
-			return { game, win: false, error: 'Invalid Player' }
+			return { game, win: false, error: 'Invalid Player', lose: false }
 		}
 
 		if (playerIndex === 0 && game.currentRound % 2 === 1) {
-			return { game, win: false, error: null }
+			return { game, win: false, error: null, lose: false }
 		}
 		if (playerIndex === 1 && game.currentRound % 2 === 0) {
-			return { game, win: false, error: null }
+			return { game, win: false, error: null, lose: false }
 		}
 
 		const interactedGameMap = game.gameMap[currentBoard.row][currentBoard.col]
 		const currentField = interactedGameMap.board[interactedField.row][interactedField.col]
 
-		if (currentField !== '') return { game, win: false, error: 'Field is not interactable' } // TODO: Maybe add error to handle interaction
+		if (currentField !== '')
+			return { game, win: false, error: 'Field is not interactable', lose: false } // TODO: Maybe add error to handle interaction
 
 		interactedGameMap.board[interactedField.row][interactedField.col] =
 			playerSymbols[game.currentRound % 2]
@@ -131,11 +133,15 @@ export class GameManager {
 			)
 		) {
 			game.win = { player: game.player[playerIndex] }
-			return { game, win: true, error: null }
+			return { game, win: true, error: null, lose: false }
 		}
 		game.gameMap[interactedField.row][interactedField.col].active = true
 		game.currentRound++
+		logger.info({ round: game.currentRound })
+		if (game.currentRound === 81) {
+			return { game, win: false, error: null, lose: true }
+		}
 
-		return { game, win: false, error: null }
+		return { game, win: false, error: null, lose: false }
 	}
 }

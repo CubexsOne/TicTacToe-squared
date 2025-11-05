@@ -10,5 +10,6 @@ export const incomingEvents = {
 	RECEIVE_GAME: 'receive_game',
 	JOIN_GAME: 'join_game',
 	UPDATE_GAME_STATE: 'update_game_state',
-	WIN_GAME: 'win_game'
+	WIN_GAME: 'win_game',
+	LOSE_GAME: 'lose_game'
 }

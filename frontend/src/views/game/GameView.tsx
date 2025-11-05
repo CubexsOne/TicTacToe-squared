@@ -23,6 +23,7 @@ export const GameView: FC = () => {
 	const navigate = useNavigate()
 	const [game, setGame] = useState<Game>()
 	const [showWinModal, setShowWinModal] = useState<boolean>(false)
+	const [showLoseModal, setShowLoseModal] = useState<boolean>(false)
 	const io = getSocket()
 
 	useEffect(() => {
@@ -33,6 +34,10 @@ export const GameView: FC = () => {
 			io.on(incomingEvents.WIN_GAME, (game: Game) => {
 				setGame(game)
 				setShowWinModal(true)
+			})
+			io.on(incomingEvents.LOSE_GAME, (game: Game) => {
+				setGame(game)
+				setShowLoseModal(true)
 			})
 			return
 		}
@@ -101,11 +106,7 @@ export const GameView: FC = () => {
 					</Stack>
 				)}
 			</Stack>
-			<Dialog
-				onClose={handleCloseModal}
-				aria-labelledby="customized-dialog-title"
-				open={showWinModal}
-			>
+			<Dialog onClose={handleCloseModal} open={showWinModal}>
 				<DialogTitle className="text-center">
 					{'🎉 ' + t('view_game_win_modal_title') + ' 🎉'}
 				</DialogTitle>
@@ -117,6 +118,19 @@ export const GameView: FC = () => {
 				>
 					<Button autoFocus onClick={handleCloseModal} variant="contained">
 						{t('view_game_win_modal_action')}
+					</Button>
+				</DialogActions>
+			</Dialog>
+			<Dialog onClose={handleCloseModal} open={showLoseModal}>
+				<DialogTitle className="text-center">
+					{'🎉 ' + t('view_game_lose_modal_title') + ' 🎉'}
+				</DialogTitle>
+				<DialogContent dividers>{t('view_game_lose_modal_content')}</DialogContent>
+				<DialogActions
+					sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2 }}
+				>
+					<Button autoFocus onClick={handleCloseModal} variant="contained">
+						{t('view_game_lose_modal_action')}
 					</Button>
 				</DialogActions>
 			</Dialog>

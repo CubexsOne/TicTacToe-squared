@@ -9,6 +9,7 @@ export type Game = {
 	player: Player[]
 	gameMap: GameMap[][]
 	win?: Win
+	lose: boolean
 }
 
 export type Win = {

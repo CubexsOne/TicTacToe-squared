@@ -2,6 +2,7 @@ import { Socket } from 'socket.io'
 import { logger } from '../utilities'
 import { Game, GameManager, InteractWithGame } from '../game/manager'
 import { handleWinGame } from './win-game'
+import { handleLoseGame } from './lose-game'
 
 export const INTERACT_WITH_GAME = 'interact_with_game'
 export const UPDATE_GAME_STATE = 'update_game_state'
@@ -9,7 +10,7 @@ export const UPDATE_GAME_STATE = 'update_game_state'
 export const handleInteractWithGame = (socket: Socket, gameMeta: InteractWithGame) => {
 	logger.info(`Event received: ${INTERACT_WITH_GAME}`)
 
-	const { game, win, error } = GameManager.Instance.interactWithGame({
+	const { game, win, error, lose } = GameManager.Instance.interactWithGame({
 		...gameMeta,
 		currentPlayerId: socket.id
 	})
@@ -21,6 +22,11 @@ export const handleInteractWithGame = (socket: Socket, gameMeta: InteractWithGam
 
 	if (win) {
 		handleWinGame(socket, game)
+		return
+	}
+
+	if (lose) {
+		handleLoseGame(socket, game)
 		return
 	}
 
