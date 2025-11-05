@@ -1,8 +1,8 @@
 {
 	"translation": {
-		"component_game_id_copy_button_tooltip": "Spiel ID kopieren",
-		"component_game_id_copy_field_click_error": "Es ist ein Fehler beim kopieren der Spiel ID via clipboard API aufgetreten",
-		"component_game_id_copy_field_label": "Spiel ID",
+		"component_game_link_copy_button_tooltip": "Beitritts-Link kopieren",
+		"component_game_link_copy_field_click_error": "Es ist ein Fehler beim kopieren des Beitritts-Links via clipboard API aufgetreten",
+		"component_game_link_copy_field_label": "Beitritts-Link",
 		"navigation_create_game": "Zurück zur Spielerstellung",
 		"navigation_tooltip_create_game": "Zurück zur Spielerstellung",
 		"navigation_settings_menu_toggle_group_theme": "Farbschema auswählen",

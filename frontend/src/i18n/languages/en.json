@@ -1,8 +1,8 @@
 {
 	"translation": {
-		"component_game_id_copy_button_tooltip": "Copy Game ID",
-		"component_game_id_copy_field_label": "Game ID",
-		"component_game_id_copy_field_click_error": "Failed to copy game id via clipboard API",
+		"component_game_link_copy_button_tooltip": "Copy join link",
+		"component_game_link_copy_field_label": "Game join link",
+		"component_game_link_copy_field_click_error": "Failed to copy the join game link via clipboard API",
 		"navigation_create_game": "Back to game creation",
 		"navigation_tooltip_create_game": "Back to game creation",
 		"navigation_settings_menu_toggle_group_theme": "Select color theme",

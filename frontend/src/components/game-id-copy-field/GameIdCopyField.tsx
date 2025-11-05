@@ -13,7 +13,7 @@ export const GameIdCopyField: FC<Props> = ({ gameId }) => {
 	const handleCopy = () => {
 		if (navigator.clipboard?.writeText) {
 			void navigator.clipboard.writeText(gameId).catch((error) => {
-				console.error(t('component_game_id_copy_field_click_error'), error)
+				console.error(t('component_game_link_copy_field_click_error'), error)
 			})
 			return
 		}
@@ -25,13 +25,13 @@ export const GameIdCopyField: FC<Props> = ({ gameId }) => {
 				<TextField
 					className="w-full"
 					variant="outlined"
-					label={t('component_game_id_copy_field_label')}
+					label={t('component_game_link_copy_field_label')}
 					value={gameId}
 					aria-readonly
 				/>
 			</Grid>
 			<Grid size={1} justifyContent="space-between" alignItems="center">
-				<Tooltip title={t('component_game_id_copy_button_tooltip')}>
+				<Tooltip title={t('component_game_link_copy_button_tooltip')}>
 					<IconButton size="large" onClick={handleCopy}>
 						<ContentCopyIcon fontSize="inherit" />
 					</IconButton>
