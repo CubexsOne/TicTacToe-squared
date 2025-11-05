@@ -1,0 +1,40 @@
+import type { FC } from 'react'
+import { Grid, IconButton, TextField } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+
+interface Props {
+	gameId: string
+}
+export const GameIdCopyField: FC<Props> = ({ gameId }) => {
+	const { t } = useTranslation()
+
+	const handleCopy = () => {
+		if (navigator.clipboard?.writeText) {
+			void navigator.clipboard.writeText(gameId).catch((error) => {
+				console.error('Failed to copy game id via clipboard API', error)
+			})
+			return
+		}
+	}
+
+	return (
+		<>
+			<Grid size={7} offset={2} justifyContent="space-between" alignItems="center">
+				<TextField
+					className="w-full"
+					variant="outlined"
+					label={t('Game ID')}
+					value={gameId}
+					aria-readonly
+				/>
+			</Grid>
+			<Grid size={1} justifyContent="space-between" alignItems="center">
+				<IconButton size="large" onClick={handleCopy}>
+					<ContentCopyIcon fontSize="inherit" />
+				</IconButton>
+			</Grid>
+		</>
+	)
+}
