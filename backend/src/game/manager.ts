@@ -1,6 +1,7 @@
 import { randomUUID, UUID } from 'node:crypto'
 import { createNewGameMap, GameMap } from './map'
 import { logger } from '../utilities'
+import { playerSymbols } from './player-symbols'
 
 export type Player = {
 	socketId: string
@@ -11,10 +12,17 @@ export type Game = {
 	id: UUID
 	currentRound: number
 	player: Player[]
-	board: GameMap[][]
+	gameMap: GameMap[][]
 }
 
 export type Games = Game[]
+
+export type InteractWithGame = {
+	gameId: Game['id']
+	currentPlayerId: Player['socketId']
+	currentBoard: { row: number; col: number }
+	interactedField: { row: number; col: number }
+}
 
 export class GameManager {
 	private static instance: GameManager | null = null
@@ -45,7 +53,7 @@ export class GameManager {
 			id: randomUUID(),
 			currentRound: 0,
 			player: [firstPlayer],
-			board: createNewGameMap()
+			gameMap: createNewGameMap()
 		}
 
 		this.games.push(game)
@@ -72,5 +80,32 @@ export class GameManager {
 	public getGameById(id: Game['id']): Game | null {
 		const game = this.games.find((item) => item.id === id)
 		return game ?? null
+	}
+
+	public interactWithGame(gameMeta: InteractWithGame): Game | null {
+		const { gameId, currentBoard, currentPlayerId, interactedField } = gameMeta
+		const game = this.getGameById(gameId)
+		if (game === null) return null
+
+		const playerIndex = game.player.findIndex((player) => player.socketId === currentPlayerId)
+
+		if (playerIndex === -1) return game // TODO: Checkout what to do if invalid player is interacting
+
+		if (playerIndex === 0 && game.currentRound % 2 === 1) return game
+		if (playerIndex === 1 && game.currentRound % 2 === 0) return game
+
+		const interactedGameMap = game.gameMap[currentBoard.row][currentBoard.col]
+		const currentField = interactedGameMap.board[interactedField.row][interactedField.col]
+
+		if (currentField !== '') return game // TODO: Maybe add error to handle interaction
+
+		interactedGameMap.board[interactedField.row][interactedField.col] =
+			playerSymbols[game.currentRound % 2]
+		interactedGameMap.active = false
+		// TODO: Check for win
+		game.gameMap[interactedField.row][interactedField.col].active = true
+		game.currentRound++
+
+		return game
 	}
 }
