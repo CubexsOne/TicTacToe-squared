@@ -6,7 +6,9 @@ import {
 	DialogContent,
 	DialogTitle,
 	Grid,
-	Stack
+	LinearProgress,
+	Stack,
+	Typography
 } from '@mui/material'
 import { useNavigate, useParams } from 'react-router'
 import { getSocket, incomingEvents, outgoingEvents } from '../../utilities'
@@ -74,6 +76,7 @@ export const GameView: FC = () => {
 			</Grid>
 			<Stack alignItems="center" justifyContent="center" spacing={8} className="h-8/10">
 				{game &&
+					game.player.length === 2 &&
 					game?.gameMap.map((row, rowIndex) => (
 						<Stack direction="row" spacing={4} key={rowIndex}>
 							{row.map((col, colIndex) => (
@@ -87,6 +90,14 @@ export const GameView: FC = () => {
 							))}
 						</Stack>
 					))}
+				{game && game.player.length < 2 && (
+					<Stack justifyContent="center" alignItems="center" gap={4}>
+						<Typography variant="h1" className="text-blue-500 dark:text-amber-400">
+							{t('view_game_waiting_player_typography')}
+						</Typography>
+						<LinearProgress color="inherit" className="w-full text-blue-500 dark:text-amber-400" />
+					</Stack>
+				)}
 			</Stack>
 			<Dialog
 				onClose={handleCloseModal}

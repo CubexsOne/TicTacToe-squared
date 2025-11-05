@@ -16,6 +16,7 @@
 		"view_create_game_game_join_button": "Join game",
 		"view_create_game_game_join_title": "Join game",
 		"view_create_game_playername_input_label": "Playername",
+		"view_game_waiting_player_typography": "Waiting for Player 2...",
 		"view_game_win_modal_action": "Back to Lobby!",
 		"view_game_win_modal_content": "won the game!",
 		"view_game_win_modal_title": "Game won"

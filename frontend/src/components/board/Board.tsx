@@ -13,7 +13,7 @@ export const Board: FC<Props> = ({ active, disabled, handleClick, usedFieldsMap 
 		<Stack
 			spacing={2}
 			alignItems="center"
-			className={`${active ? 'rounded-lg border border-solid border-amber-500' : ''} p-4`}
+			className={`${active ? 'rounded-lg border border-solid border-blue-500 dark:border-amber-500' : ''} p-4`}
 			mt={4}
 		>
 			{usedFieldsMap.map((row, rowIndex) => (
@@ -22,7 +22,7 @@ export const Board: FC<Props> = ({ active, disabled, handleClick, usedFieldsMap 
 						<Button
 							disabled={disabled}
 							key={colIndex}
-							variant="outlined"
+							variant="contained"
 							style={{ height: '48px' }}
 							onClick={() => handleClick(rowIndex, colIndex)}
 							children={content}
