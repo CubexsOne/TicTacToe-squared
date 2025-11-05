@@ -10,4 +10,5 @@ dev: ## Starts frontend in dev-server
 	npm run dev
 
 docker-build: ## Builds frontend Docker image tagged with the current git hash via BuildKit
-	docker buildx build --tag frontend:$(GIT_HASH) .
+	@docker buildx build --tag frontend:$(GIT_HASH) .
+	@docker tag frontend:$(GIT_HASH) frontend:latest

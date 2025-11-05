@@ -9,4 +9,5 @@ dev: ## Starts backend in dev-server
 	@npm run dev
 
 docker-build: ## Builds backend Docker image tagged with the current git hash via BuildKit
-	docker buildx build --tag backend:$(GIT_HASH) .
+	@docker buildx build --tag backend:$(GIT_HASH) .
+	@docker tag backend:$(GIT_HASH) backend:latest
