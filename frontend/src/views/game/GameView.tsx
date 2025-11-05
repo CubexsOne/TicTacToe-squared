@@ -24,7 +24,8 @@ export const GameView: FC = () => {
 		console.log({ game })
 		if (game === undefined) {
 			io.emit(outgoingEvents.REQUEST_GAME, id)
-			io.on(incomingEvents.RECEIVE_GAME, (game: Game) => setGame(game))
+			io.once(incomingEvents.RECEIVE_GAME, (game: Game) => setGame(game))
+			io.on(incomingEvents.UPDATE_GAME_STATE, (game: Game) => setGame(game))
 			return
 		}
 	}, [game, io, id])

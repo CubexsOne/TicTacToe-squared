@@ -24,9 +24,6 @@ export const CreateGameView: FC = () => {
 	const [gameId, setGameId] = useState<string>('')
 
 	const io = getSocket()
-	io.on(incomingEvents.GAME_CREATED, (gameId: Game['id']) => {
-		navigate(`/game/${gameId}`)
-	})
 
 	const handleChange = (_event: React.SyntheticEvent, newTab: number) => {
 		setTab(newTab)
@@ -38,13 +35,23 @@ export const CreateGameView: FC = () => {
 
 	const handleGameCreation = () => {
 		io.emit(outgoingEvents.CREATE_GAME, playername)
+		io.on(incomingEvents.GAME_CREATED, (gameId: Game['id']) => {
+			navigate(`/game/${gameId}`)
+		})
 	}
 
 	const handleGameIdInput = (event: ChangeEvent<HTMLInputElement>) => {
 		setGameId(event.currentTarget.value.trim())
 	}
 	const handleJoinExistingGame = () => {
-		navigate(`/game/${gameId}`)
+		io.emit(outgoingEvents.JOINING_GAME, { gameId, playername })
+		io.on(incomingEvents.JOIN_GAME, (gameId: Game['id']) => {
+			if (gameId === null) {
+				// TODO: Show error notification
+				return
+			}
+			navigate(`/game/${gameId}`)
+		})
 	}
 
 	return (
@@ -79,7 +86,15 @@ export const CreateGameView: FC = () => {
 				)}
 				{tab === TABS.JOIN_GAME && (
 					<>
-						<CardContent className="flex items-center justify-between gap-2">
+						<CardContent className="flex flex-col items-center justify-between gap-8">
+							<TextField
+								className="w-full"
+								id="playername-input"
+								label={t('view_create_game_playername_input_label')}
+								onChange={handlePlayernameInput}
+								value={playername}
+								variant="outlined"
+							/>
 							<TextField
 								className="w-full"
 								id="game-id-input"
@@ -93,7 +108,7 @@ export const CreateGameView: FC = () => {
 							<Button
 								aria-label={t('view_create_game_game_join_button')}
 								children={t('view_create_game_game_join_button')}
-								disabled={gameId.length === 0}
+								disabled={gameId.length === 0 || playername.length === 0}
 								onClick={handleJoinExistingGame}
 								variant="contained"
 							/>
