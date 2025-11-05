@@ -16,7 +16,8 @@ services:
       - proxy
 
   frontend:
-    image: frontend:latest
+    image: ghcr.io/cubexsone/tictactoe-squared/frontend:latest
+    build: ./frontend
     expose:
       - "80"
     labels:
@@ -29,7 +30,8 @@ services:
       - proxy
 
   backend:
-    image: backend:latest
+    image: ghcr.io/cubexsone/tictactoe-squared/backend:latest
+    build: ./backend
     expose:
       - "3000"
     labels:

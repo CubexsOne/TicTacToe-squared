@@ -9,5 +9,9 @@ build-all: ## Builds all services
 	@cd frontend && make docker-build;
 	@cd backend && make docker-build;
 
+push-all: ## Pushs all services
+	@cd frontend && make docker-push;
+	@cd backend && make docker-push;
+
 start: ## Starts services local
 	@docker compose up && docker compose down;
