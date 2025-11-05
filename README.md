@@ -26,6 +26,12 @@ Tic Tac Toe, but bigger
 - Express (not really used)
 - socket.io
 
+## Screens
+![Dark-Mode](docs/assets/Xnapper-2025-11-05-19.52.36.png)
+![Light-Mode](docs/assets/Xnapper-2025-11-05-19.52.58.png)
+
+*Hint*: The rgb background is from the screenshot software "Xnapper" and not part of the game
+
 ---
 Made with 🩷 by [CubexsOne][githubProfile]
 
