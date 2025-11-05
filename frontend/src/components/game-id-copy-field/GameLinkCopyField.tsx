@@ -7,7 +7,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 interface Props {
 	gameId: string
 }
-export const GameIdCopyField: FC<Props> = ({ gameId }) => {
+export const GameLinkCopyField: FC<Props> = ({ gameId }) => {
 	const { t } = useTranslation()
 
 	const handleCopy = () => {

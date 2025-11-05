@@ -13,7 +13,7 @@ import {
 import { useNavigate, useParams } from 'react-router'
 import { getSocket, incomingEvents, outgoingEvents } from '../../utilities'
 import type { Game } from './model'
-import { Board, GameIdCopyField } from '../../components'
+import { Board, GameLinkCopyField } from '../../components'
 import { useTranslation } from 'react-i18next'
 import { PlayerView } from '../../components/player-view'
 
@@ -73,7 +73,7 @@ export const GameView: FC = () => {
 	return (
 		<>
 			<Grid className="h-1/10 px-8 py-4" container spacing={2}>
-				{game && game.player.length < 2 && <GameIdCopyField gameId={id || ''} />}
+				{game && game.player.length < 2 && <GameLinkCopyField gameId={id || ''} />}
 				{game && game.player.length === 2 && <PlayerView game={game} />}
 			</Grid>
 			<Stack alignItems="center" justifyContent="center" spacing={8} className="h-8/10">

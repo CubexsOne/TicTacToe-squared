@@ -1,1 +1,1 @@
-export * from './GameIdCopyField'
+export * from './GameLinkCopyField'
