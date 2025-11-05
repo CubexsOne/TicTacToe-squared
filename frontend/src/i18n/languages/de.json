@@ -1,5 +1,6 @@
 {
 	"translation": {
+		"component_game_id_copy_button_tooltip": "Spiel ID kopieren",
 		"component_game_id_copy_field_click_error": "Es ist ein Fehler beim kopieren der Spiel ID via clipboard API aufgetreten",
 		"component_game_id_copy_field_label": "Spiel ID",
 		"navigation_create_game": "Zurück zur Spielerstellung",
@@ -16,6 +17,8 @@
 		"view_create_game_game_join_button": "Spiel beitreten",
 		"view_create_game_game_join_title": "Spiel beitreten",
 		"view_create_game_playername_input_label": "Spielername",
+		"view_game_player_view_player_label": "Spieler",
+		"view_game_player_view_your_turn_label": "Du bist dran",
 		"view_game_waiting_player_typography": "Warte auf Spieler 2...",
 		"view_game_win_modal_action": "Zurück zur Lobby!",
 		"view_game_win_modal_content": "hat das Spiel gewonnen!",

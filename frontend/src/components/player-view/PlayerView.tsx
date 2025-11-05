@@ -59,7 +59,7 @@ export const PlayerView: FC<Props> = ({ game }) => {
 									<Typography
 										variant="overline"
 										className="tracking-wide text-slate-500 dark:text-slate-400"
-									>{`${t('Player')} ${index + 1}`}</Typography>
+									>{`${t('view_game_player_view_player_label')} ${index + 1}`}</Typography>
 									<Typography variant="h6" className="text-slate-900 dark:text-white">
 										{player.playername}
 									</Typography>
@@ -69,7 +69,7 @@ export const PlayerView: FC<Props> = ({ game }) => {
 										color="warning"
 										variant="filled"
 										icon={<PlayArrowRoundedIcon fontSize="small" />}
-										label={t('Your turn!')}
+										label={t('view_game_player_view_your_turn_label')}
 										className="font-semibold"
 									/>
 								)}

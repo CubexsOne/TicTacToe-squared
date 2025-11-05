@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Grid, IconButton, TextField } from '@mui/material'
+import { Grid, IconButton, TextField, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
@@ -31,9 +31,11 @@ export const GameIdCopyField: FC<Props> = ({ gameId }) => {
 				/>
 			</Grid>
 			<Grid size={1} justifyContent="space-between" alignItems="center">
-				<IconButton size="large" onClick={handleCopy}>
-					<ContentCopyIcon fontSize="inherit" />
-				</IconButton>
+				<Tooltip title={t('component_game_id_copy_button_tooltip')}>
+					<IconButton size="large" onClick={handleCopy}>
+						<ContentCopyIcon fontSize="inherit" />
+					</IconButton>
+				</Tooltip>
 			</Grid>
 		</>
 	)
