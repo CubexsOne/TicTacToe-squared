@@ -1,5 +1,3 @@
-import type { GameMap } from '../../components'
-
 export type Player = {
 	socketId: string
 	playername: string
@@ -10,7 +8,12 @@ export type Game = {
 	id: string
 	currentRound: number
 	player: Player[]
-	board: GameMap[][]
+	gameMap: GameMap[][]
 }
 
 export type Games = Game[]
+
+export type GameMap = {
+	active: boolean
+	board: string[][]
+}
