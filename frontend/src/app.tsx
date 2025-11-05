@@ -7,7 +7,11 @@ import { getSocket } from './utilities'
 export const App: FC = () => {
 	useEffect(() => {
 		const io = getSocket()
-		io.connect()
+
+		if (!io.connected) {
+			io.connect()
+		}
+
 		return () => {
 			io.disconnect()
 		}
