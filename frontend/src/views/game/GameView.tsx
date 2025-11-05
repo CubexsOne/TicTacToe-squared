@@ -46,6 +46,17 @@ export const GameView: FC = () => {
 		}
 	}
 
+	const nextPlayer = () => {
+		if (!game) return false
+		const playerIndex = game.player.findIndex((player) => player.socketId === io.id)
+		if (playerIndex === -1) return false
+
+		if (playerIndex === 0 && game.currentRound % 2 === 1) return false
+		if (playerIndex === 1 && game.currentRound % 2 === 0) return false
+
+		return true
+	}
+
 	console.log({
 		playerId: io.id,
 		currentRound: game?.currentRound,
@@ -60,11 +71,12 @@ export const GameView: FC = () => {
 			<Stack alignItems="center" justifyContent="center" spacing={8} className="h-8/10">
 				{game &&
 					game?.gameMap.map((row, rowIndex) => (
-						<Stack direction="row" spacing={8} key={rowIndex}>
+						<Stack direction="row" spacing={4} key={rowIndex}>
 							{row.map((col, colIndex) => (
 								<Board
+									active={col.active}
 									key={colIndex}
-									disabled={!col.active}
+									disabled={!col.active || !nextPlayer()}
 									handleClick={handleClick(rowIndex, colIndex)}
 									usedFieldsMap={col.board}
 								/>
