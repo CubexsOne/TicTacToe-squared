@@ -1,10 +1,10 @@
 import { randomUUID, UUID } from 'node:crypto'
 import { createNewGameMap, GameMap } from './map'
+import { logger } from '../utilities'
 
 export type Player = {
 	socketId: string
 	playername: string
-	symbol: string
 }
 
 export type Game = {
@@ -38,8 +38,7 @@ export class GameManager {
 	public create(socketId: string, playername: string): Game['id'] {
 		const firstPlayer: Player = {
 			socketId,
-			playername,
-			symbol: 'X'
+			playername
 		}
 
 		const game: Game = {
@@ -51,6 +50,23 @@ export class GameManager {
 
 		this.games.push(game)
 		return game.id
+	}
+
+	public joinGame(socketId: string, playername: Player['playername'], id: Game['id']): Game | null {
+		const game: Game | undefined = this.games.find((game) => {
+			if (game.id === id) {
+				if (game.player.length < 2) {
+					const newPlayer: Player = {
+						socketId,
+						playername
+					}
+					game.player.push(newPlayer)
+					return true
+				}
+			}
+		})
+
+		return game ?? null
 	}
 
 	public getGameById(id: Game['id']): Game | null {
