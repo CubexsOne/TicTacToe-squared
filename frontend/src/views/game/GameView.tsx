@@ -1,24 +1,29 @@
 import { useEffect, useState, type FC } from 'react'
-import { Grid, Stack } from '@mui/material'
-import { useParams } from 'react-router'
-
-// import {
-// 	Board,
-// 	checkForWin,
-// 	createNewGameMap,
-// 	cloneGameMap,
-// 	type GameMap,
-// 	playerSymbols
-// } from '../../components'
+import {
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Grid,
+	Stack
+} from '@mui/material'
+import { useNavigate, useParams } from 'react-router'
 import { getSocket, incomingEvents, outgoingEvents } from '../../utilities'
 import type { Game } from './model'
 import { Board, GameIdCopyField } from '../../components'
 import { playerSymbols } from '../../utilities/game'
+import { useTranslation } from 'react-i18next'
 
 export const GameView: FC = () => {
 	const { id } = useParams()
+	const { t } = useTranslation()
+	const navigate = useNavigate()
 	const [game, setGame] = useState<Game>()
+	const [showWinModal, setShowWinModal] = useState<boolean>(false)
 	const io = getSocket()
+
+	console.log('win', { 'win?': game?.win !== undefined, showWinModal })
 
 	useEffect(() => {
 		console.log({ game })
@@ -26,6 +31,10 @@ export const GameView: FC = () => {
 			io.emit(outgoingEvents.REQUEST_GAME, id)
 			io.once(incomingEvents.RECEIVE_GAME, (game: Game) => setGame(game))
 			io.on(incomingEvents.UPDATE_GAME_STATE, (game: Game) => setGame(game))
+			io.on(incomingEvents.WIN_GAME, (game: Game) => {
+				setGame(game)
+				setShowWinModal(true)
+			})
 			return
 		}
 	}, [game, io, id])
@@ -44,6 +53,11 @@ export const GameView: FC = () => {
 				})
 			}
 		}
+	}
+
+	const handleCloseModal = () => {
+		setShowWinModal(false)
+		navigate('/game')
 	}
 
 	const nextPlayer = () => {
@@ -84,6 +98,21 @@ export const GameView: FC = () => {
 						</Stack>
 					))}
 			</Stack>
+			<Dialog
+				onClose={handleCloseModal}
+				aria-labelledby="customized-dialog-title"
+				open={showWinModal}
+			>
+				<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+					{t('Game Win')}
+				</DialogTitle>
+				<DialogContent dividers>{t(`${game?.win?.player.playername} won the game`)}</DialogContent>
+				<DialogActions>
+					<Button autoFocus onClick={handleCloseModal}>
+						{t('Back to lobby')}
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</>
 	)
 }

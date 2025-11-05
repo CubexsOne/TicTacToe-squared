@@ -2,6 +2,7 @@ import { randomUUID, UUID } from 'node:crypto'
 import { createNewGameMap, GameMap } from './map'
 import { logger } from '../utilities'
 import { playerSymbols } from './player-symbols'
+import { checkForWin } from './check-for-win'
 
 export type Player = {
 	socketId: string
@@ -13,6 +14,12 @@ export type Game = {
 	currentRound: number
 	player: Player[]
 	gameMap: GameMap[][]
+	win?: Win
+}
+
+export type Win = {
+	// TODO: Update for multiple rounds
+	player: Player
 }
 
 export type Games = Game[]
@@ -22,6 +29,12 @@ export type InteractWithGame = {
 	currentPlayerId: Player['socketId']
 	currentBoard: { row: number; col: number }
 	interactedField: { row: number; col: number }
+}
+
+export type GameResponseMeta = {
+	game: Game | null
+	win: boolean
+	error: string | null // TODO: Maybe enum?
 }
 
 export class GameManager {
@@ -82,30 +95,47 @@ export class GameManager {
 		return game ?? null
 	}
 
-	public interactWithGame(gameMeta: InteractWithGame): Game | null {
+	public interactWithGame(gameMeta: InteractWithGame): GameResponseMeta {
 		const { gameId, currentBoard, currentPlayerId, interactedField } = gameMeta
 		const game = this.getGameById(gameId)
 		if (game === null) return null
 
 		const playerIndex = game.player.findIndex((player) => player.socketId === currentPlayerId)
 
-		if (playerIndex === -1) return game // TODO: Checkout what to do if invalid player is interacting
+		if (playerIndex === -1) {
+			// TODO: Checkout what to do if invalid player is interacting
+			return { game, win: false, error: 'Invalid Player' }
+		}
 
-		if (playerIndex === 0 && game.currentRound % 2 === 1) return game
-		if (playerIndex === 1 && game.currentRound % 2 === 0) return game
+		if (playerIndex === 0 && game.currentRound % 2 === 1) {
+			return { game, win: false, error: null }
+		}
+		if (playerIndex === 1 && game.currentRound % 2 === 0) {
+			return { game, win: false, error: null }
+		}
 
 		const interactedGameMap = game.gameMap[currentBoard.row][currentBoard.col]
 		const currentField = interactedGameMap.board[interactedField.row][interactedField.col]
 
-		if (currentField !== '') return game // TODO: Maybe add error to handle interaction
+		if (currentField !== '') return { game, win: false, error: 'Field is not interactable' } // TODO: Maybe add error to handle interaction
 
 		interactedGameMap.board[interactedField.row][interactedField.col] =
 			playerSymbols[game.currentRound % 2]
 		interactedGameMap.active = false
-		// TODO: Check for win
+		if (
+			checkForWin(
+				interactedGameMap.board,
+				interactedField.row,
+				interactedField.col,
+				game.currentRound
+			)
+		) {
+			game.win = { player: game.player[playerIndex] }
+			return { game, win: true, error: null }
+		}
 		game.gameMap[interactedField.row][interactedField.col].active = true
 		game.currentRound++
 
-		return game
+		return { game, win: false, error: null }
 	}
 }

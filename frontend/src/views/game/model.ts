@@ -1,7 +1,6 @@
 export type Player = {
 	socketId: string
 	playername: string
-	symbol: string
 }
 
 export type Game = {
@@ -9,6 +8,12 @@ export type Game = {
 	currentRound: number
 	player: Player[]
 	gameMap: GameMap[][]
+	win?: Win
+}
+
+export type Win = {
+	// TODO: Update for multiple rounds
+	player: Player
 }
 
 export type Games = Game[]
