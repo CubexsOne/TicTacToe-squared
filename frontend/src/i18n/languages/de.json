@@ -1,5 +1,7 @@
 {
 	"translation": {
+		"component_game_id_copy_field_click_error": "Es ist ein Fehler beim kopieren der Spiel ID via clipboard API aufgetreten",
+		"component_game_id_copy_field_label": "Spiel ID",
 		"navigation_create_game": "Zurück zur Spielerstellung",
 		"navigation_tooltip_create_game": "Zurück zur Spielerstellung",
 		"navigation_settings_menu_toggle_group_theme": "Farbschema auswählen",
@@ -13,6 +15,9 @@
 		"view_create_game_game_id_input_label": "Spiel-ID",
 		"view_create_game_game_join_button": "Spiel beitreten",
 		"view_create_game_game_join_title": "Spiel beitreten",
-		"view_create_game_playername_input_label": "Spielername"
+		"view_create_game_playername_input_label": "Spielername",
+		"view_game_win_modal_action": "Zurück zur Lobby!",
+		"view_game_win_modal_content": "hat das Spiel gewonnen!",
+		"view_game_win_modal_title": "Spiel gewonnen"
 	}
 }

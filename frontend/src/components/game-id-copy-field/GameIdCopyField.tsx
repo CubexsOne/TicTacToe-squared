@@ -13,7 +13,7 @@ export const GameIdCopyField: FC<Props> = ({ gameId }) => {
 	const handleCopy = () => {
 		if (navigator.clipboard?.writeText) {
 			void navigator.clipboard.writeText(gameId).catch((error) => {
-				console.error('Failed to copy game id via clipboard API', error)
+				console.error(t('component_game_id_copy_field_click_error'), error)
 			})
 			return
 		}
@@ -25,7 +25,7 @@ export const GameIdCopyField: FC<Props> = ({ gameId }) => {
 				<TextField
 					className="w-full"
 					variant="outlined"
-					label={t('Game ID')}
+					label={t('component_game_id_copy_field_label')}
 					value={gameId}
 					aria-readonly
 				/>

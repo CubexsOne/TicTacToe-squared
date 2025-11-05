@@ -103,13 +103,13 @@ export const GameView: FC = () => {
 				aria-labelledby="customized-dialog-title"
 				open={showWinModal}
 			>
-				<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-					{t('Game Win')}
-				</DialogTitle>
-				<DialogContent dividers>{t(`${game?.win?.player.playername} won the game`)}</DialogContent>
+				<DialogTitle sx={{ m: 0, p: 2 }}>{t('view_game_win_modal_title')}</DialogTitle>
+				<DialogContent
+					dividers
+				>{`${game?.win?.player.playername} ${t('view_game_win_modal_content')}`}</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={handleCloseModal}>
-						{t('Back to lobby')}
+						{t('view_game_win_modal_action')}
 					</Button>
 				</DialogActions>
 			</Dialog>
