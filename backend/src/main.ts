@@ -4,8 +4,7 @@ import { createServer } from 'node:http'
 
 import { createExpressApp, createSocketServer } from './server'
 import { environments, logger } from './utilities'
-import { CREATE_GAME, handleCreateGame } from './socket-events/create-game'
-import { handleRequestGame, REQUEST_GAME } from './socket-events/request-game'
+import { CREATE_GAME, handleCreateGame, handleRequestGame, REQUEST_GAME } from './socket-events'
 
 const app = createExpressApp()
 
@@ -13,7 +12,7 @@ const httpServer = createServer(app)
 const io = createSocketServer(httpServer)
 
 io.on('connection', (socket) => {
-	logger.debug({ socketId: socket.id }, 'New connection established')
+	logger.info({ playerId: socket.id }, `Event received: connection`)
 	socket.on(CREATE_GAME, (playername) => handleCreateGame(socket, playername))
 	socket.on(REQUEST_GAME, (id) => handleRequestGame(socket, id))
 })
