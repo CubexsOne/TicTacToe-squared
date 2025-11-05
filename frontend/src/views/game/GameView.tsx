@@ -30,23 +30,19 @@ export const GameView: FC = () => {
 		}
 	}, [game, io, id])
 
-	const handleClick = (gameRow: number, gameCol: number) => {
+	const handleClick = (currentBoardRow: number, currentBoardCol: number) => {
 		return (fieldRow: number, fieldCol: number) => {
-			// 		const nextGameMap = cloneGameMap(gameMap)
-			// 		const currentField = nextGameMap[gameRow][gameCol]
-			// 		if (currentField.board[fieldRow][fieldCol] !== '') {
-			// 			return
-			// 		}
-			// 		currentField.board[fieldRow][fieldCol] = playerSymbols[currentRound % 2]
-			// 		currentField.active = false
-			console.log({ gameRow, gameCol, fieldRow, fieldCol })
-			// 		if (checkForWin(currentField.board, fieldRow, fieldCol, currentRound)) {
-			// 			setGameMap(nextGameMap)
-			// 			return
-			// 		}
-			// 		nextGameMap[fieldRow][fieldCol].active = true
-			// 		setGameMap(nextGameMap)
-			// 		setCurrentRound((prevRound) => prevRound + 1)
+			if (game) {
+				const currentField = game.gameMap[currentBoardRow][currentBoardCol]
+				if (currentField.board[fieldRow][fieldCol] !== '') {
+					return
+				}
+				io.emit(outgoingEvents.INTERACT_WITH_GAME, {
+					gameId: game.id,
+					currentBoard: { row: currentBoardRow, col: currentBoardCol },
+					interactedField: { row: fieldRow, col: fieldCol }
+				})
+			}
 		}
 	}
 
@@ -63,7 +59,7 @@ export const GameView: FC = () => {
 			</Grid>
 			<Stack alignItems="center" justifyContent="center" spacing={8} className="h-8/10">
 				{game &&
-					game?.board.map((row, rowIndex) => (
+					game?.gameMap.map((row, rowIndex) => (
 						<Stack direction="row" spacing={8} key={rowIndex}>
 							{row.map((col, colIndex) => (
 								<Board
