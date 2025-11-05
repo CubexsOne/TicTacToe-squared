@@ -72,11 +72,11 @@ export const GameView: FC = () => {
 
 	return (
 		<>
-			<Grid className="h-1/10 px-8 py-4" container spacing={2}>
+			<Grid className="min-h-1/10 px-8 py-4" container spacing={2}>
 				{game && game.player.length < 2 && <GameLinkCopyField gameId={id || ''} />}
 				{game && game.player.length === 2 && <PlayerView game={game} />}
 			</Grid>
-			<Stack alignItems="center" justifyContent="center" spacing={8} className="h-8/10">
+			<Stack alignItems="center" justifyContent="center" spacing={8} className="min-h-8/10">
 				{game &&
 					game.player.length === 2 &&
 					game?.gameMap.map((row, rowIndex) => (

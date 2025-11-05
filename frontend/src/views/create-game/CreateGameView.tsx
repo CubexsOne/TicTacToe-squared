@@ -30,11 +30,11 @@ export const CreateGameView: FC = () => {
 	}
 
 	const handlePlayernameInput = (event: ChangeEvent<HTMLInputElement>) => {
-		setPlayername(event.currentTarget.value.trim())
+		setPlayername(event.currentTarget.value)
 	}
 
 	const handleGameCreation = () => {
-		io.emit(outgoingEvents.CREATE_GAME, playername)
+		io.emit(outgoingEvents.CREATE_GAME, playername.trim())
 		io.on(incomingEvents.GAME_CREATED, (gameId: Game['id']) => {
 			navigate(`/game/${gameId}`)
 		})
